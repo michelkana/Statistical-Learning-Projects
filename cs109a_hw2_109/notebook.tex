@@ -1,0 +1,1691 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{cs109a\_hw2\_109\_FINAL}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{ CS109A Introduction to Data
+Science:}\label{cs109a-introduction-to-data-science}
+
+\subsection{Homework 2: Linear and k-NN
+Regression}\label{homework-2-linear-and-k-nn-regression}
+
+\textbf{Harvard University} \textbf{Fall 2018} \textbf{Instructors}:
+Pavlos Protopapas, Kevin Rader
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}RUN THIS CELL }
+        \PY{k+kn}{import} \PY{n+nn}{requests}
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{core}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{HTML}
+        \PY{n}{styles} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{https://raw.githubusercontent.com/Harvard\PYZhy{}IACS/2018\PYZhy{}CS109A/master/content/styles/cs109.css}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{text}
+        \PY{n}{HTML}\PY{p}{(}\PY{n}{styles}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1}]:} <IPython.core.display.HTML object>
+\end{Verbatim}
+            
+    \subsubsection{INSTRUCTIONS}\label{instructions}
+
+\begin{itemize}
+\tightlist
+\item
+  To submit your assignment follow the instructions given in canvas.
+\item
+  Restart the kernel and run the whole notebook again before you submit.
+\item
+  If you submit individually and you have worked with someone, please
+  include the name of your {[}one{]} partner below.
+\item
+  As much as possible, try and stick to the hints and functions we
+  import at the top of the homework, as those are the ideas and tools
+  the class supports and is aiming to teach. And if a problem specifies
+  a particular library you're required to use that library, and possibly
+  others from the import list.
+\end{itemize}
+
+    Names of people you have worked with goes here:
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{r2\PYZus{}score}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k}{import} \PY{n}{KNeighborsRegressor}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+        \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sm}
+        \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{import} \PY{n}{OLS}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{c+c1}{\PYZsh{} some more required libraries}
+        \PY{c+c1}{\PYZsh{}import seaborn as sns}
+        \PY{c+c1}{\PYZsh{}from sklearn.cross\PYZus{}validation import train\PYZus{}test\PYZus{}split}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{lines} \PY{k}{import} \PY{n}{Line2D}
+\end{Verbatim}
+
+
+    Predicting Taxi Pickups in NYC
+
+In this homework, we will explore k-nearest neighbor and linear
+regression methods for predicting a quantitative variable. Specifically,
+we will build regression models that can predict the number of taxi
+pickups in New York city at any given time of the day. These prediction
+models will be useful, for example, in monitoring traffic in the city.
+
+The data set for this problem is given in the file
+\texttt{dataset\_1.csv}. You will need to separate it into training and
+test sets. The first column contains the time of a day in minutes, and
+the second column contains the number of pickups observed at that time.
+The data set covers taxi pickups recorded in NYC during Jan 2015.
+
+We will fit regression models that use the time of the day (in minutes)
+as a predictor and predict the average number of taxi pickups at that
+time. The models will be fitted to the training set and evaluated on the
+test set. The performance of the models will be evaluated using the
+\(R^2\) metric.
+
+     Question 1 {[}25 pts{]}
+
+    \textbf{1.1}. Use pandas to load the dataset from the csv file
+\texttt{dataset\_1.csv} into a pandas data frame. Use the
+\texttt{train\_test\_split} method from \texttt{sklearn} with a
+\texttt{random\_state} of 42 and a \texttt{test\_size} of 0.2 to split
+the dataset into training and test sets. Store your train set dataframe
+in the variable \texttt{train\_data}. Store your test set dataframe in
+the variable \texttt{test\_data}.
+
+\textbf{1.2}. Generate a scatter plot of the training data points with
+clear labels on the x and y axes. The time of the day on the x-axis and
+the number of taxi pickups on the y-axis. Make sure to title your plot.
+
+\textbf{1.3}. Does the pattern of taxi pickups make intuitive sense to
+you?
+
+    \subsubsection{Answers}\label{answers}
+
+    \textbf{1.1 Use pandas to load the dataset from the csv file ...}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} read the file}
+        \PY{c+c1}{\PYZsh{} your code here}
+        \PY{n}{dftaxi} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/dataset\PYZus{}1.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}check your dataframe}
+        \PY{n}{dftaxi}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}    TimeMin  PickupCount
+        0    860.0         33.0
+        1     17.0         75.0
+        2    486.0         13.0
+        3    300.0          5.0
+        4    385.0         10.0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} split the data}
+        \PY{c+c1}{\PYZsh{} your code here}
+        
+        \PY{c+c1}{\PYZsh{}set random\PYZus{}state to get the same split every time}
+        \PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}data} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{dftaxi}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{dftaxi}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{train\PYZus{}data}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(1250, 2) (1000, 2) (250, 2)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Test size is indeed 20\PYZpc{} of total}
+        \PY{c+c1}{\PYZsh{} your code here }
+        \PY{n}{test\PYZus{}data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{n}{dftaxi}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} 0.2
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{test\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+      TimeMin  PickupCount
+680     436.0         24.0
+1102    408.0          9.0
+394    1189.0         51.0
+930     139.0         66.0
+497     756.0         15.0
+
+    \end{Verbatim}
+
+    \textbf{1.2 Generate a scatter plot of the training data points}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{} your code here}
+         \PY{c+c1}{\PYZsh{} function for scatter plot}
+         \PY{k}{def} \PY{n+nf}{gen\PYZus{}scatterplot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{xlabel}\PY{p}{,} \PY{n}{ylabel}\PY{p}{,} \PY{n}{title}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} font size}
+             \PY{n}{f\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{18}
+             
+             \PY{c+c1}{\PYZsh{} make the figure}
+             \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} Create figure object}
+         
+             \PY{c+c1}{\PYZsh{} set axes limits to make the scale nice}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{y}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} adjust size of tickmarks in axes}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{tick\PYZus{}params}\PY{p}{(}\PY{n}{labelsize} \PY{o}{=} \PY{n}{f\PYZus{}size}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} adjust size of axis label}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{n}{xlabel}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{n}{f\PYZus{}size}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{n}{ylabel}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{n}{f\PYZus{}size}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} set figure title label}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{title}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{n}{f\PYZus{}size}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} set up grid }
+             \PY{n}{ax}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{1.75}\PY{p}{,} \PY{n}{ls}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.15}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} make actual plot}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}ax.legend(loc=\PYZsq{}best\PYZsq{}, fontsize = f\PYZus{}size)}
+             
+             \PY{k}{return} \PY{n}{ax}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{gen\PYZus{}scatterplot}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{o}{.}\PY{n}{TimeMin}\PY{p}{,} \PY{n}{train\PYZus{}data}\PY{o}{.}\PY{n}{PickupCount}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time in Min.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pickup Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scatter plot of train data points}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1fc67c58e48>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{1.3 Discuss your results. Does the pattern of taxi pickups make
+intuitive sense to you?}
+
+    \emph{your answer here}
+
+Given the x-axis is time of the day in minutes, we notice:
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\item
+  There are more pick ups in the early hours of the day and later hours
+  of the day.
+\item
+  In other words, number of taxi pick ups in NYC is more between 4pm and
+  5am
+\end{enumerate}
+
+This could probably be the case as people prefer trains during the day
+and taxis for evening and late night commute.
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  hourly number of taxi pick ups gradually increases after 6 AM till
+  about 6 PM. It then starts decreasing till 5 AM.
+\end{enumerate}
+
+    Question 2 {[}25 pts{]}
+
+In lecture we've seen k-Nearest Neighbors (k-NN) Regression, a
+non-parametric regression technique. In the following problems please
+use built in functionality from \texttt{sklearn} to run k-NN Regression.
+
+\textbf{2.1}. Choose \texttt{TimeMin} as your feature variable and
+\texttt{PickupCount} as your response variable. Create a dictionary of
+\texttt{KNeighborsRegressor} objects and call it \texttt{KNNModels}. Let
+the key for your \texttt{KNNmodels} dictionary be the value of \(k\) and
+the value be the corresponding \texttt{KNeighborsRegressor} object. For
+\(k \in \{1, 10, 75, 250, 500, 750, 1000\}\), fit k-NN regressor models
+on the training set (\texttt{train\_data}).
+
+\textbf{2.2}. For each \(k\) on the training set, overlay a scatter plot
+of the actual values of \texttt{PickupCount} vs. \texttt{TimeMin} with a
+scatter plot of \textbf{predictions} for \texttt{PickupCount} vs
+\texttt{TimeMin}. Do the same for the test set. You should have one
+figure with 2 x 7 total subplots; for each \(k\) the figure should have
+two subplots, one subplot for the training set and one for the test set.
+
+\textbf{Hints}: 1. Each subplot should use different color and/or
+markers to distinguish k-NN regression prediction values from the actual
+data values. 2. Each subplot must have appropriate axis labels, title,
+and legend. 3. The overall figure should have a title.
+
+\textbf{2.3}. Report the \(R^2\) score for the fitted models on both the
+training and test sets for each \(k\) (reporting the values in tabular
+form is encouraged).
+
+\textbf{2.4}. Plot, in a single figure, the \(R^2\) values from the
+model on the training and test set as a function of \(k\).
+
+\textbf{Hints}: 1. Again, the figure must have axis labels and a legend.
+2. Differentiate \(R^2\) visualization on the training and test set by
+color and/or marker. 3. Make sure the \(k\) values are sorted before
+making your plot.
+
+\textbf{2.5}. Discuss the results:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  If \(n\) is the number of observations in the training set, what can
+  you say about a k-NN regression model that uses \(k = n\)?\\
+\item
+  What does an \(R^2\) score of \(0\) mean?\\
+\item
+  What would a negative \(R^2\) score mean? Are any of the calculated
+  \(R^2\) you observe negative?
+\item
+  Do the training and test \(R^2\) plots exhibit different trends?
+  Describe.\\
+\item
+  How does the value of \(k\) affect the fitted model and in particular
+  the training and test \(R^2\) values?
+\item
+  What is the best value of \(k\) and what are the corresponding
+  training/test set \(R^2\) values?
+\end{enumerate}
+
+    \subsubsection{Answers}\label{answers}
+
+    \textbf{2.1 Choose \texttt{TimeMin} as your feature variable and
+\texttt{PickupCount} as your response variable. Create a dictionary ...
+}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} inspect the data}
+         \PY{n}{dftaxi}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} the TimeMin falls between 12 AM and 11:59 PM}
+         \PY{n}{dftaxi}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TimeMin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} there are duplicated entries with the same TimeMin}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:}          PickupCount
+         TimeMin             
+         4.0                2
+         5.0                1
+         6.0                1
+         7.0                2
+         8.0                1
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} your code here}
+         
+         \PY{c+c1}{\PYZsh{}reshape x and y of the train and test data}
+         
+         \PY{k}{def} \PY{n+nf}{fun\PYZus{}reshape}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{p}{)}\PY{p}{:}
+           
+           \PY{n}{x\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{o}{.}\PY{n}{TimeMin}\PY{p}{)}
+           \PY{n}{x\PYZus{}train} \PY{o}{=} \PY{n}{x\PYZus{}train}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+           \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{o}{.}\PY{n}{PickupCount}\PY{p}{)}
+           \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{y\PYZus{}train}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+           
+           \PY{n}{x\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{test\PYZus{}data}\PY{o}{.}\PY{n}{TimeMin}\PY{p}{)}
+           \PY{n}{x\PYZus{}test} \PY{o}{=} \PY{n}{x\PYZus{}test}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+           \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{test\PYZus{}data}\PY{o}{.}\PY{n}{PickupCount}\PY{p}{)}
+           \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{y\PYZus{}test}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+           \PY{k}{return} \PY{p}{[}\PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{x\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{froutput} \PY{o}{=} \PY{n}{fun\PYZus{}reshape}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{p}{)}
+         \PY{n}{x\PYZus{}train} \PY{o}{=} \PY{n}{froutput}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{froutput}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         
+         \PY{n}{x\PYZus{}test} \PY{o}{=} \PY{n}{froutput}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+         \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{froutput}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{}your code here}
+         
+         \PY{c+c1}{\PYZsh{} KNN Regression steps to predict Pickup Count values}
+         
+         \PY{n}{KNNModels} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}   \PY{c+c1}{\PYZsh{}empty dictionary of KNNModels}
+         \PY{n}{k\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{75}\PY{p}{,}\PY{l+m+mi}{250}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{,}\PY{l+m+mi}{750}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{]}   \PY{c+c1}{\PYZsh{}list of given k values to find the \PYZsq{}k\PYZsq{} nearest neighbors}
+         \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n}{k\PYZus{}list}\PY{p}{:}
+             \PY{n}{knr} \PY{o}{=} \PY{n}{KNeighborsRegressor}\PY{p}{(}\PY{n}{n\PYZus{}neighbors}\PY{o}{=}\PY{n}{k}\PY{p}{)}
+             \PY{n}{KNNModels}\PY{p}{[}\PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{n}{knr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}     
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}Check KNNModels dictionary }
+        \PY{k}{for} \PY{n}{key}\PY{p}{,}\PY{n}{values} \PY{o+ow}{in} \PY{n}{KNNModels}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{key}\PY{p}{,} \PY{n}{values}\PY{p}{)}
+\end{Verbatim}
+
+
+    \textbf{2.2 For each \(k\) on the training set, overlay a scatter plot
+... }
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} your code here}
+         
+         \PY{c+c1}{\PYZsh{} Plot predictions vs actual}
+         \PY{c+c1}{\PYZsh{}\PYZsh{} your code here}
+         
+         \PY{n}{f}\PY{p}{,} \PY{n}{axarr} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{25}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{f}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scatter plot of actual vs KNN predicted for Train and Test data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZhy{}large}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{r2\PYZus{}scores} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{key}\PY{p}{,} \PY{n}{value} \PY{o+ow}{in} \PY{n}{KNNModels}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             
+             \PY{n}{pred\PYZus{}key} \PY{o}{=} \PY{n}{KNNModels}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{)}
+             \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{count}\PY{p}{]}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{pred\PYZus{}key}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predicted}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{marker} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{count}\PY{p}{]}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}          \PY{c+c1}{\PYZsh{}legend for each subplot}
+             \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{count}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time in minutes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}   \PY{c+c1}{\PYZsh{}x\PYZhy{}axis label}
+             \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{count}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pickups count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}     \PY{c+c1}{\PYZsh{}y\PYZhy{}axis label}
+             \PY{n}{r2\PYZus{}score\PYZus{}train} \PY{o}{=} \PY{n}{r2\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{pred\PYZus{}key}\PY{p}{)}              \PY{c+c1}{\PYZsh{}r2 score calculation}
+             
+             \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{count}\PY{p}{]}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{actual}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{marker} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{count}\PY{p}{]}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{count}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train Data k=}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{key}\PY{p}{)}\PY{p}{)}
+             \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{count}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time in minutes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{count}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pickups count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{count}\PY{p}{]}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}          \PY{c+c1}{\PYZsh{}hide grid lines}
+             
+             \PY{n}{pred\PYZus{}key} \PY{o}{=} \PY{n}{KNNModels}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{)}
+             \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{count}\PY{p}{]}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{,} \PY{n}{pred\PYZus{}key}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predicted}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{count}\PY{p}{]}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{count}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time in minutes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{count}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pickups count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{r2\PYZus{}score\PYZus{}test} \PY{o}{=} \PY{n}{r2\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{pred\PYZus{}key}\PY{p}{)}                  \PY{c+c1}{\PYZsh{}r2 score calculation}
+             
+             \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{count}\PY{p}{]}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{actual}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{count}\PY{p}{]}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{count}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Data k=}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{key}\PY{p}{)}\PY{p}{)}
+             \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{count}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time in minutes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{count}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pickups count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{count}\PY{p}{]}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}        
+             
+             \PY{n}{count}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}    \PY{c+c1}{\PYZsh{} counter that increments to move along the values of k}
+             \PY{n}{r2\PYZus{}scores}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{key}\PY{p}{,} \PY{n}{r2\PYZus{}score\PYZus{}train}\PY{p}{,} \PY{n}{r2\PYZus{}score\PYZus{}test}\PY{p}{]}\PY{p}{)}   \PY{c+c1}{\PYZsh{} append the key and R2 values for test and train data to return as a list}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{2.3 Report the \(R^2\) score for the fitted models ... }
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} your code here}
+         \PY{n}{r2df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{r2\PYZus{}scores}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{k}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{train\PYZus{}data\PYZus{}score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test\PYZus{}data\PYZus{}score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{r2df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:}       k  train\_data\_score  test\_data\_score
+         0     1          0.712336        -0.418932
+         1    10          0.509825         0.272068
+         2    75          0.445392         0.390310
+         3   250          0.355314         0.340341
+         4   500          0.290327         0.270321
+         5   750          0.179434         0.164909
+         6  1000          0.000000        -0.000384
+\end{Verbatim}
+            
+    \textbf{2.4 Plot, in a single figure, the \(R^2\) values from the model
+on the training and test set as a function of \(k\)}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} your code here}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{r2df}\PY{o}{.}\PY{n}{k}\PY{p}{,} \PY{n}{r2df}\PY{o}{.}\PY{n}{train\PYZus{}data\PYZus{}score}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train data score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}                \PY{c+c1}{\PYZsh{}Scatter plot for train data}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{r2df}\PY{o}{.}\PY{n}{k}\PY{p}{,} \PY{n}{r2df}\PY{o}{.}\PY{n}{test\PYZus{}data\PYZus{}score}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test data score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}       \PY{c+c1}{\PYZsh{}Scatter plot for test data}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{r2df}\PY{o}{.}\PY{n}{k}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}R\PYZca{}2\PYZdl{}  KNN prediction values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{2.5 Discuss the results}
+
+    \begin{itemize}
+\tightlist
+\item
+  your answer here*
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  If \(n\) is the number of observations in the training set, what can
+  you say about a k-NN regression model that uses \(k = n\)?
+\end{enumerate}
+
+If \(k = n\) then the regression model will be the mean model which a
+poor model and doesn't predict correctly
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  What does an \(R^2\) score of \(0\) mean?
+\end{enumerate}
+
+\(R^2\) score of \(0\) means that the regression model is equivalent to
+the mean model and is just a horizontal line parallel to x-axis
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  What would a negative \(R^2\) score mean? Are any of the calculated
+  \(R^2\) you observe negative?
+\end{enumerate}
+
+\(R^2\) score is always positive on training data unless there is an
+error in the model. But we can have the \(R^2\) score of test data as
+negative on a model built on train data. This happens during overfitting
+as it is the case for \(k=1,1000\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Do the training and test \(R^2\) plots exhibit different trends?
+  Describe.
+\end{enumerate}
+
+Yes the training \(R^2\) can be different from the test data \(R^2\).
+This is seen for \(k=1, 10, 75\) where training data exhibits a better
+score than test.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  How does the value of \(k\) affect the fitted model and in particular
+  the training and test \(R^2\) values?
+\end{enumerate}
+
+When \(k\) has a low value between 1 and 10, \(R^2\) score is better and
+is closer to 1. For large \(k\) values, \(R^2\) score is closer to zero
+or the mean model which we would like to avoid.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  What is the best value of \(k\) and what are the corresponding
+  training/test set \(R^2\) values?
+\end{enumerate}
+
+\(k\)=1 is the best value of \(k\) as it fits the best model than others
+
+     Question 3 {[}25 pts{]}
+
+We next consider simple linear regression, which we know from lecture is
+a parametric approach for regression that assumes that the response
+variable has a linear relationship with the predictor. Use the
+\texttt{statsmodels} module for Linear Regression. This module has
+built-in functions to summarize the results of regression and to compute
+confidence intervals for estimated regression parameters.
+
+\textbf{3.1}. Again choose \texttt{TimeMin} as your predictor and
+\texttt{PickupCount} as your response variable. Create a \texttt{OLS}
+class instance and use it to fit a Linear Regression model on the
+training set (\texttt{train\_data}). Store your fitted model in the
+variable \texttt{OLSModel}.
+
+\textbf{3.2}. Re-create your plot from 2.2 using the predictions from
+\texttt{OLSModel} on the training and test set. You should have one
+figure with two subplots, one subplot for the training set and one for
+the test set.
+
+\textbf{Hints}: 1. Each subplot should use different color and/or
+markers to distinguish Linear Regression prediction values from that of
+the actual data values. 2. Each subplot must have appropriate axis
+labels, title, and legend. 3. The overall figure should have a title.
+
+\textbf{3.3}. Report the \(R^2\) score for the fitted model on both the
+training and test sets.
+
+\textbf{3.4}. Report the slope and intercept values for the fitted
+linear model.
+
+\textbf{3.5}. Report the \(95\%\) confidence interval for the slope and
+intercept.
+
+\textbf{3.6}. Create a scatter plot of the residuals
+(\(e = y - \hat{y}\)) of the linear regression model on the training set
+as a function of the predictor variable (i.e. \texttt{TimeMin}). Place
+on your plot a horizontal line denoting the constant zero residual.
+
+\textbf{3.7}. Discuss the results:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  How does the test \(R^2\) score compare with the best test \(R^2\)
+  value obtained with k-NN regression?
+\item
+  What does the sign of the slope of the fitted linear model convey
+  about the data?\\
+\item
+  Based on the \(95\%\) confidence interval, do you consider the
+  estimates of the model parameters to be reliable?\\
+\item
+  Do you expect \(99\%\) confidence intervals for the slope and
+  intercept to be tighter or wider than the \(95\%\) confidence
+  intervals? Briefly explain your answer.\\
+\item
+  Based on the residuals plot that you made, discuss whether or not the
+  assumption of linearity is valid for this data.
+\item
+  Based on the data structure, what restriction on the model would you
+  put at the endpoints (at \(x\approx0\) and \(x\approx1440\))? What
+  does this say about the linearity assumption?
+\end{enumerate}
+
+    \subsubsection{Answers}\label{answers}
+
+    \textbf{3.1 Again choose \texttt{TimeMin} as your predictor and
+\texttt{PickupCount} as your response variable. Create a \texttt{OLS}
+class instance ... }
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} your code here}
+         
+         \PY{c+c1}{\PYZsh{} Transform the predictor pandas series into a np array}
+         \PY{c+c1}{\PYZsh{} Invoke function on converting dataframe to numpy array and reshape \PYZhy{}\PYZhy{}\PYZhy{} written in 2.1}
+         
+         \PY{n}{froutput} \PY{o}{=} \PY{n}{fun\PYZus{}reshape}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{p}{)}
+         \PY{n}{x\PYZus{}train} \PY{o}{=} \PY{n}{froutput}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{froutput}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         
+         \PY{n}{x\PYZus{}test} \PY{o}{=} \PY{n}{froutput}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+         \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{froutput}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} your code here}
+         
+         \PY{c+c1}{\PYZsh{} Regression OLS function}
+         \PY{k}{def} \PY{n+nf}{OLS\PYZus{}reg}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{:}
+         
+           \PY{c+c1}{\PYZsh{} create the X matrix by appending a column of ones to x\PYZus{}train}
+           \PY{n}{X} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{add\PYZus{}constant}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{)}
+         
+           \PY{c+c1}{\PYZsh{} build the OLS model (ordinary least squares) from the training data}
+           \PY{n}{osl} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{OLS}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{X}\PY{p}{)}
+         
+           \PY{c+c1}{\PYZsh{} do the fit and save regression info (parameters, etc) in results\PYZus{}sm}
+           \PY{c+c1}{\PYZsh{} save the fitted model in OLSModel variable}
+           \PY{n}{OLSModel} \PY{o}{=} \PY{n}{osl}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+           \PY{k}{return} \PY{n}{OLSModel}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} your code here}
+         \PY{n}{OLSModel} \PY{o}{=} \PY{n}{OLS\PYZus{}reg}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+    \textbf{3.2 Re-create your plot from 2.2 using the predictions from
+\texttt{OLSModel} on the training and test set ... }
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} your code here}
+         
+         \PY{n}{r2\PYZus{}scores\PYZus{}osl} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{fig\PYZus{}scat}\PY{p}{,} \PY{n}{ax\PYZus{}scat} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+         \PY{n}{fig\PYZus{}scat}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scatter plot of train and test data with actual and OLS model predicted values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZhy{}large}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{X} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{add\PYZus{}constant}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{)}
+         \PY{n}{y\PYZus{}train\PYZus{}predicted} \PY{o}{=} \PY{n}{OLSModel}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         \PY{n}{ax\PYZus{}scat}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train\PYZus{}predicted}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{marker} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train Data Prediction Values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax\PYZus{}scat}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time in minutes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax\PYZus{}scat}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pickup count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax\PYZus{}scat}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{r2\PYZus{}score\PYZus{}osl\PYZus{}train} \PY{o}{=} \PY{n}{r2\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train\PYZus{}predicted}\PY{p}{)}
+         
+         \PY{n}{ax\PYZus{}scat}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{marker} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train Data Actual Values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax\PYZus{}scat}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time in minutes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax\PYZus{}scat}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pickup count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax\PYZus{}scat}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax\PYZus{}scat}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{} Plot best\PYZhy{}fit line for test}
+         \PY{n}{X} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{add\PYZus{}constant}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{)}
+         \PY{n}{y\PYZus{}test\PYZus{}predicted} \PY{o}{=} \PY{n}{OLSModel}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         \PY{n}{ax\PYZus{}scat}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}predicted}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Data Prediction Values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax\PYZus{}scat}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time in minutes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax\PYZus{}scat}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pickup count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax\PYZus{}scat}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{r2\PYZus{}score\PYZus{}osl\PYZus{}test} \PY{o}{=} \PY{n}{r2\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}predicted}\PY{p}{)}
+         
+         \PY{n}{ax\PYZus{}scat}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Data Actual Values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax\PYZus{}scat}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time in minutes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax\PYZus{}scat}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pickup count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax\PYZus{}scat}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax\PYZus{}scat}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{n}{r2\PYZus{}scores\PYZus{}osl}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{r2\PYZus{}score\PYZus{}osl\PYZus{}train}\PY{p}{,} \PY{n}{r2\PYZus{}score\PYZus{}osl\PYZus{}test}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{3.3 Report the \(R^2\) score for the fitted model on both the
+training and test sets. }
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{} your code here}
+         
+         \PY{n}{r2df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{r2\PYZus{}scores\PYZus{}osl}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r2\PYZus{}score\PYZus{}osl\PYZus{}train}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r2\PYZus{}score\PYZus{}osl\PYZus{}test}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{r2df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:}    r2\_score\_osl\_train  r2\_score\_osl\_test
+         0            0.243026           0.240662
+\end{Verbatim}
+            
+    \textbf{3.4 Report the slope and intercept values for the fitted linear
+model. }
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} your code here}
+         
+         \PY{c+c1}{\PYZsh{} pull the beta parameters out from results\PYZus{}sm}
+         \PY{n}{beta0\PYZus{}sm} \PY{o}{=} \PY{n}{OLSModel}\PY{o}{.}\PY{n}{params}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{beta1\PYZus{}sm} \PY{o}{=} \PY{n}{OLSModel}\PY{o}{.}\PY{n}{params}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The regression coefficients from the statsmodels package are: beta\PYZus{}0 = }\PY{l+s+si}{\PYZob{}0:8.6f\PYZcb{}}\PY{l+s+s2}{ and beta\PYZus{}1 = }\PY{l+s+si}{\PYZob{}1:8.6f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{beta0\PYZus{}sm}\PY{p}{,} \PY{n}{beta1\PYZus{}sm}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The regression coefficients from the statsmodels package are: beta\_0 = 16.750601 and beta\_1 = 0.023335
+
+    \end{Verbatim}
+
+    \textbf{3.5 Report the \(95\%\) confidence interval for the slope and
+intercept.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} your code here}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{95}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{ Confidence interval for slope is:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{OLSModel}\PY{o}{.}\PY{n}{conf\PYZus{}int}\PY{p}{(}\PY{l+m+mf}{0.05}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{95}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{ Confidence interval for intercept is:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{OLSModel}\PY{o}{.}\PY{n}{conf\PYZus{}int}\PY{p}{(}\PY{l+m+mf}{0.05}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+95\% Confidence interval for slope is: [14.67514134 18.82606151] 
+95\% Confidence interval for intercept is: [0.02077697 0.02589338]
+
+    \end{Verbatim}
+
+    \textbf{3.6 Create a scatter plot of the residuals}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{} your code here}
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{y\PYZus{}bar} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{e} \PY{o}{=} \PY{n}{y\PYZus{}train} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}bar}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{e}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Residuals in Pickup count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time in minutes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scatter plot of the residuals on training set}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZhy{}large}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} Text(0.5,1,'Scatter plot of the residuals on training set')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_53_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{3.7 Discuss the results:}
+
+    \emph{your answer here} 1. How does the test \(R^2\) score compare with
+the best test \(R^2\) value obtained with k-NN regression?
+
+On the test data set, we ontained \(R^2 = 0.24066\) using the linear
+model which is less than \(R^2 = 0.39\) obtained using the best k-NN
+model (\(k=75\)).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  What does the sign of the slope of the fitted linear model convey
+  about the data?
+\end{enumerate}
+
+Slope has a positive sign which conveys positive correlation between the
+feature and response variable. That is if the feature variable increases
+by one unit then the response variable also increases by the function
+f(x)+epsilon
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Based on the \(95\%\) confidence interval, do you consider the
+  estimates of the model parameters to be reliable?
+\end{enumerate}
+
+Yes, I consider the model parameters to be reliable for 2 reasons: (a)
+The confidence interval doesn't contain zero, so we can be confident
+that there will be no change in direction of the beta parameters (b) The
+confidence interval contains our beta parameters
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Do you expect \(99\%\) confidence intervals for the slope and
+  intercept to be tighter or wider than the \(95\%\) confidence
+  intervals? Briefly explain your answer.
+\end{enumerate}
+
+\(99\%\) confidence intervals for the slope and intercept will be wider
+than \(95\%\) confidence intervals because \(95\%\) confidence intervals
+is at 2 standard deviations away from the mean while \(99\%\) confidence
+intervals is at 3 standard deviations away from the mean.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Based on the residuals plot that you made, discuss whether or not the
+  assumption of linearity is valid for this data.
+\end{enumerate}
+
+The residuals plot shows a wave, something like a quadratic line.
+Although some residuals are positive, some negative, for each x the
+residuals are somehow not evenly distributed arround zero, especially at
+the endpoints. Therefore the assumption of linearity for this data seems
+to be undermined.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Based on the data structure, what restriction on the model would you
+  put at the endpoints (at \(x\approx0\) and \(x\approx1440\))? What
+  does this say about the linearity assumption?
+\end{enumerate}
+
+If we remove data points at the endpoints for the training data, then
+the model would produce a data structure of residuals that does not have
+a quadratic shape any more. The model would become \(\hat{f}(x)\) for
+\(x>\approx0\) and \(x<\approx1440\). The linearity assumption based on
+the scatter plot of data together with the best fit line is not a
+certainty until it is confirmed by an unstructured residuals
+distribution.
+
+    Outliers
+
+You may recall from lectures that OLS Linear Regression can be
+susceptible to outliers in the data. We're going to look at a dataset
+that includes some outliers and get a sense for how that affects
+modeling data with Linear Regression. \textbf{Note, this is an
+open-ended question, there is not one correct solution (or one correct
+definition of an outlier).}
+
+     Question 4 {[}25 pts{]}
+
+\textbf{4.1}. We've provided you with two files
+\texttt{outliers\_train.txt} and \texttt{outliers\_test.txt}
+corresponding to training set and test set data. What does a visual
+inspection of training set tell you about the existence of outliers in
+the data?
+
+\textbf{4.2}. Choose \texttt{X} as your feature variable and \texttt{Y}
+as your response variable. Use \texttt{statsmodel} to create a Linear
+Regression model on the training set data. Store your model in the
+variable \texttt{OutlierOLSModel}.
+
+\textbf{4.3}. You're given the knowledge ahead of time that there are 3
+outliers in the training set data. The test set data doesn't have any
+outliers. You want to remove the 3 outliers in order to get the optimal
+intercept and slope. In the case that you're sure of the existence and
+number (3) of outliers ahead of time, one potential brute force method
+to outlier detection might be to find the best Linear Regression model
+on all possible subsets of the training set data with 3 points removed.
+Using this method, how many times will you have to calculate the Linear
+Regression coefficients on the training data?
+
+\textbf{4.4} In CS109 we're strong believers that creating heuristic
+models is a great way to build intuition. In that spirit, construct an
+approximate algorithm to find the 3 outlier candidates in the training
+data by taking advantage of the Linear Regression residuals. Place your
+algorithm in the function \texttt{find\_outliers\_simple}. It should
+take the parameters \texttt{dataset\_x} and \texttt{dataset\_y}
+representing your features and response variable values (make sure your
+response variable is stored as a numpy column vector). The return value
+should be a list \texttt{outlier\_indices} representing the indices of
+the 3 outliers in the original datasets you passed in. Remove the
+outliers that your algorithm identified, use \texttt{statsmodels} to
+create a Linear Regression model on the remaining training set data, and
+store your model in the variable \texttt{OutlierFreeSimpleModel}.
+
+\textbf{4.5} Create a figure with two subplots: the first is a
+scatterplot where the color of the points denotes the outliers from the
+non-outliers in the training set, and include two regression lines on
+this scatterplot: one fitted with the outliers included and one fitted
+with the outlier removed (all on the training set). The second plot
+should include a scatterplot of points from the test set with the same
+two regression lines fitted on the training set: with and without
+outliers. Visually which model fits the test set data more closely?
+
+\textbf{4.6}. Calculate the \(R^2\) score for the
+\texttt{OutlierOLSModel} and the \texttt{OutlierFreeSimpleModel} on the
+test set data. Which model produces a better \(R^2\) score?
+
+\textbf{4.7}. One potential problem with the brute force outlier
+detection approach in 4.3 and the heuristic algorithm you constructed
+4.4 is that they assume prior knowledge of the number of outliers. In
+general you can't expect to know ahead of time the number of outliers in
+your dataset. Alter the algorithm you constructed in 4.4 to create a
+more general heuristic (i.e. one which doesn't presuppose the number of
+outliers) for finding outliers in your dataset. Store your algorithm in
+the function \texttt{find\_outliers\_general}. It should take the
+parameters \texttt{dataset\_x} and \texttt{dataset\_y} representing your
+features and response variable values (make sure your response variable
+is stored as a numpy column vector). It can take additional parameters
+as long as they have default values set. The return value should be the
+list \texttt{outlier\_indices} representing the indices of the outliers
+in the original datasets you passed in (in the order of 'severity').
+Remove the outliers that your algorithm identified, use
+\texttt{statsmodels} to create a Linear Regression model on the
+remaining training set data, and store your model in the variable
+\texttt{OutlierFreeGeneralModel}.
+
+\textbf{Hints}: 1. How many outliers should you try to identify in each
+step? 2. If you plotted an \(R^2\) score for each step the algorithm,
+what might that plot tell you about stopping conditions?
+
+\textbf{4.8}. Run your algorithm in 4.7 on the training set data.\\
+1. What outliers does it identify? 2. How do those outliers compare to
+the outliers you found in 4.4? 3. How does the general outlier-free
+Linear Regression model you created in 4.7 perform compared to the
+simple one in 4.4?
+
+    \subsubsection{Answers}\label{answers}
+
+\textbf{4.1 We've provided you with two files
+\texttt{outliers\_train.txt} and \texttt{outliers\_test.txt}
+corresponding to training set and test set data. What does a visual
+inspection of training set tell you about the existence of outliers in
+the data? }
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c+c1}{\PYZsh{} read the data}
+         \PY{c+c1}{\PYZsh{} your code here}
+         
+         \PY{n}{dfouttrain} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/outliers\PYZus{}train.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{dfouttest} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/outliers\PYZus{}test.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{} your code here}
+         \PY{c+c1}{\PYZsh{} obtaining x and y from the dataframe}
+         \PY{n}{train\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{dfouttrain}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{train\PYZus{}y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{dfouttrain}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{c+c1}{\PYZsh{} your code here}
+         \PY{n}{test\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{dfouttest}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{test\PYZus{}y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{dfouttest}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{c+c1}{\PYZsh{} your code here}
+         
+         \PY{n}{gen\PYZus{}scatterplot}\PY{p}{(}\PY{n}{train\PYZus{}x}\PY{p}{,} \PY{n}{train\PYZus{}y}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scatter plot of train data points}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1fc6762d400>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{c+c1}{\PYZsh{} your code here}
+         \PY{n}{gen\PYZus{}scatterplot}\PY{p}{(}\PY{n}{test\PYZus{}x}\PY{p}{,} \PY{n}{test\PYZus{}y}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scatter plot of test data points}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1fc69189cf8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_63_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \emph{your answer here}
+
+Visual inspection tells us there are 2 outliers around x=-2 on the train
+data set and 1 outlier around x=2
+
+We can remove these outliers by taking out the top 3 maximum distance
+points from the best fit line.
+
+    \textbf{4.2 Choose \texttt{X} as your feature variable and \texttt{Y} as
+your response variable. Use \texttt{statsmodel} to create ... }
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{k+kn}{import} \PY{n+nn}{warnings}
+         \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{OutlierOLSModel} \PY{o}{=} \PY{n}{OLS\PYZus{}reg}\PY{p}{(}\PY{n}{train\PYZus{}x}\PY{p}{,} \PY{n}{train\PYZus{}y}\PY{p}{)}   \PY{c+c1}{\PYZsh{} invoke function OLS\PYZus{}reg to run statsmodel regression}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}check your outlierOLSmodel variable}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{OutlierOLSModel}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \textbf{4.3 One potential brute force method to outlier detection might
+be to find the best Linear Regression model on all possible subsets of
+the training set data with 3 points removed. Using this method, how many
+times will you have to calculate the Linear Regression coefficients on
+the training data?}
+
+    \emph{your answer here}
+
+Using brute force method, we can remove the outliers in 53C3
+combinations that is by calculating the regression coeffecients 27,720
+times.
+
+56C3 = 56! / (3! * 53!) = 27,720
+
+    There are 53 data points in total. For each subset of 3 data points
+chosen without replacement, we will need to evaluate the linear model.
+The number of times we need to do this equals the number of subsets of 3
+elements we can build out of 53 elements. From algebreic combinatoric,
+this is the binomial coefficient \({53}\choose{3}\), what gives 23426
+
+    \textbf{4.4 CS109 hack ... }
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{c+c1}{\PYZsh{} get outliers}
+         \PY{c+c1}{\PYZsh{} your code here}
+         
+         \PY{k}{def} \PY{n+nf}{find\PYZus{}outliers\PYZus{}simple}\PY{p}{(}\PY{n}{dataset\PYZus{}x}\PY{p}{,} \PY{n}{dataset\PYZus{}y}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} your code here}
+             
+             \PY{c+c1}{\PYZsh{}reshape dataset}
+             \PY{n}{dataset\PYZus{}x} \PY{o}{=} \PY{n}{dataset\PYZus{}x}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{dataset\PYZus{}y} \PY{o}{=} \PY{n}{dataset\PYZus{}y}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}add constant to save a place for beta0 in regression equation}
+             \PY{n}{X} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{add\PYZus{}constant}\PY{p}{(}\PY{n}{dataset\PYZus{}x}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}OutlierOLSModel variable is set to Statsmodel OLS regression output}
+             \PY{n}{OutlierOLSModel} \PY{o}{=} \PY{n}{OLS\PYZus{}reg}\PY{p}{(}\PY{n}{dataset\PYZus{}x}\PY{p}{,} \PY{n}{dataset\PYZus{}y}\PY{p}{)}
+              
+             \PY{c+c1}{\PYZsh{}computing y predicted values  }
+             \PY{n}{dataset\PYZus{}y\PYZus{}predicted} \PY{o}{=} \PY{n}{OutlierOLSModel}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{dataset\PYZus{}y\PYZus{}predicted} \PY{o}{=} \PY{n}{dataset\PYZus{}y\PYZus{}predicted}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}    \PY{c+c1}{\PYZsh{}reshape dataset\PYZus{}y\PYZus{}predicted}
+             
+             \PY{n}{residuals} \PY{o}{=}  \PY{p}{(}\PY{n}{dataset\PYZus{}y\PYZus{}predicted} \PY{o}{\PYZhy{}} \PY{n}{dataset\PYZus{}y}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}    \PY{c+c1}{\PYZsh{}compute residuals as a squared differences between actual and predicted}
+             
+             \PY{n}{residuals} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{residuals}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{product}\PY{p}{(}\PY{n}{residuals}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}   \PY{c+c1}{\PYZsh{}reshape residuals array}
+             \PY{k}{return} \PY{n}{residuals}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{:}\PY{p}{]}   \PY{c+c1}{\PYZsh{}return a list of top 3 residuals or top 3 distant points from best fit regression line}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{} your code here}
+         \PY{c+c1}{\PYZsh{} check output of the outliers function}
+         \PY{n}{outliers\PYZus{}3} \PY{o}{=} \PY{n}{find\PYZus{}outliers\PYZus{}simple}\PY{p}{(}\PY{n}{train\PYZus{}x}\PY{p}{,} \PY{n}{train\PYZus{}y}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{3 outliers where found at indices:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{outliers\PYZus{}3}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+3 outliers where found at indices:
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:} array([52, 51, 50], dtype=int64)
+\end{Verbatim}
+            
+    \textbf{4.5 Create a figure with two subplots: the first is a
+scatterplot ... }
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{f}\PY{p}{,} \PY{n}{axarr} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{f}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scatter plots of 2 Regression lines on TRAIN and TEST data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZhy{}large}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{train\PYZus{}x\PYZus{}woo} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{train\PYZus{}x}\PY{p}{,} \PY{n}{outliers\PYZus{}3}\PY{p}{)}   \PY{c+c1}{\PYZsh{} x\PYZhy{}array after deleting outliers}
+         \PY{n}{train\PYZus{}y\PYZus{}woo} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{train\PYZus{}y}\PY{p}{,} \PY{n}{outliers\PYZus{}3}\PY{p}{)}   \PY{c+c1}{\PYZsh{} y\PYZhy{}array after deleting outliers}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} SCATTER PLOT 1 ON TRAIN DATA \PYZsh{}\PYZsh{}\PYZsh{} }
+         
+         \PY{c+c1}{\PYZsh{} create a scatter plot of the training data}
+         \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training data with 2 regression lines with and without outlier}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{train\PYZus{}x\PYZus{}woo}\PY{p}{,} \PY{n}{train\PYZus{}y\PYZus{}woo}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}    \PY{c+c1}{\PYZsh{}plot data points without outlier}
+         \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time in minutes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pickups count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} overlay a scatter plot of the outliers}
+         \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{train\PYZus{}x}\PY{p}{[}\PY{n}{outliers\PYZus{}3}\PY{p}{]}\PY{p}{,} \PY{n}{train\PYZus{}y}\PY{p}{[}\PY{n}{outliers\PYZus{}3}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train data outlier}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{marker} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{}plot outliers}
+         
+         \PY{c+c1}{\PYZsh{} create a regression line on training data with outliers included}
+         \PY{n}{OutlierOLSModel} \PY{o}{=} \PY{n}{OLS\PYZus{}reg}\PY{p}{(}\PY{n}{train\PYZus{}x}\PY{p}{,} \PY{n}{train\PYZus{}y}\PY{p}{)}
+         \PY{n}{X} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{add\PYZus{}constant}\PY{p}{(}\PY{n}{train\PYZus{}x}\PY{p}{)}
+         \PY{n}{best\PYZus{}fit\PYZus{}line} \PY{o}{=} \PY{n}{OutlierOLSModel}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         \PY{n}{best\PYZus{}fit\PYZus{}line} \PY{o}{=} \PY{n}{best\PYZus{}fit\PYZus{}line}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{best\PYZus{}fit\PYZus{}line}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{train\PYZus{}x}\PY{p}{,} \PY{n}{best\PYZus{}fit\PYZus{}line}\PY{p}{,} \PY{n}{ls}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color} \PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train best fit with outliers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}   \PY{c+c1}{\PYZsh{}plot regression line for data with outlier}
+         
+         \PY{c+c1}{\PYZsh{} create a regression line on training data with outliers removed}
+         \PY{n}{OutlierFreeSimpleModel} \PY{o}{=} \PY{n}{OLS\PYZus{}reg}\PY{p}{(}\PY{n}{train\PYZus{}x\PYZus{}woo}\PY{p}{,} \PY{n}{train\PYZus{}y\PYZus{}woo}\PY{p}{)}
+         \PY{n}{X} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{add\PYZus{}constant}\PY{p}{(}\PY{n}{train\PYZus{}x\PYZus{}woo}\PY{p}{)}
+         \PY{n}{best\PYZus{}fit\PYZus{}woo} \PY{o}{=} \PY{n}{OutlierFreeSimpleModel}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         \PY{n}{best\PYZus{}fit\PYZus{}woo} \PY{o}{=} \PY{n}{best\PYZus{}fit\PYZus{}woo}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{best\PYZus{}fit\PYZus{}woo}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{train\PYZus{}x\PYZus{}woo}\PY{p}{,} \PY{n}{best\PYZus{}fit\PYZus{}woo}\PY{p}{,} \PY{n}{ls}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train best fit without outliers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{best}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} SCATTER PLOT 2 ON TEST DATA \PYZsh{}\PYZsh{}\PYZsh{} }
+         
+         \PY{c+c1}{\PYZsh{} create a scatter plot of the test data}
+         \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test data with regression lines from training data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time in minutes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pickups count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{test\PYZus{}x}\PY{p}{,} \PY{n}{test\PYZus{}y}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{purple}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} create a regression line on training data with outliers included}
+         \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{train\PYZus{}x}\PY{p}{,} \PY{n}{best\PYZus{}fit\PYZus{}line}\PY{p}{,} \PY{n}{ls}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color} \PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train best fit with outliers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} create a regression line on training data with outliers removed}
+         \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{train\PYZus{}x\PYZus{}woo}\PY{p}{,} \PY{n}{best\PYZus{}fit\PYZus{}woo}\PY{p}{,} \PY{n}{ls}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train best fit without outliers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{best}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{axarr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_76_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \emph{your answer here}
+
+By visual inspection of the 2 above subplots, best fit line from outlier
+free model is a good fit for the test data
+
+    \textbf{4.6 Calculate the \(R^2\) score for the \texttt{OutlierOLSModel}
+and the \texttt{OutlierFreeSimpleModel} on the test set data. Which
+model produces a better \(R^2\) score?}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{X} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{add\PYZus{}constant}\PY{p}{(}\PY{n}{test\PYZus{}x}\PY{p}{)}   \PY{c+c1}{\PYZsh{} add constant to store a place for beta0}
+         
+         \PY{c+c1}{\PYZsh{} test score with outlier}
+         \PY{n}{test\PYZus{}y\PYZus{}predicted} \PY{o}{=} \PY{n}{OutlierOLSModel}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         \PY{n}{r2\PYZus{}score\PYZus{}test} \PY{o}{=} \PY{n}{r2\PYZus{}score}\PY{p}{(}\PY{n}{test\PYZus{}y}\PY{p}{,} \PY{n}{test\PYZus{}y\PYZus{}predicted}\PY{p}{)}
+         
+         \PY{n}{test\PYZus{}y\PYZus{}predicted\PYZus{}woo} \PY{o}{=} \PY{n}{OutlierFreeSimpleModel}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         \PY{n}{r2\PYZus{}score\PYZus{}test\PYZus{}woo} \PY{o}{=} \PY{n}{r2\PYZus{}score}\PY{p}{(}\PY{n}{test\PYZus{}y}\PY{p}{,} \PY{n}{test\PYZus{}y\PYZus{}predicted\PYZus{}woo}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The score for the model trained without outliers is }\PY{l+s+si}{\PYZob{}0:8.6f\PYZcb{}}\PY{l+s+s2}{, which is better than the score for the model trained with outliers }\PY{l+s+si}{\PYZob{}1:8.6f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{r2\PYZus{}score\PYZus{}test\PYZus{}woo}\PY{p}{,} \PY{n}{r2\PYZus{}score\PYZus{}test}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The score for the model trained without outliers is 0.452957, which is better than the score for the model trained with outliers 0.340857
+
+    \end{Verbatim}
+
+    \textbf{4.7 One potential problem with the brute force outlier detection
+approach in 4.3 and the heuristic algorithm you constructed 4.4 is that
+they assume prior knowledge of the number of outliers. }
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{c+c1}{\PYZsh{} your code here}
+         \PY{c+c1}{\PYZsh{} general heuristic algorithm for outliers identification}
+         \PY{c+c1}{\PYZsh{} full\PYZus{}run = True means that all data points are returned as outliers sorted by severity}
+         \PY{c+c1}{\PYZsh{}                 This is used for identifying the stopping condition}
+         \PY{k}{def} \PY{n+nf}{find\PYZus{}outliers\PYZus{}general}\PY{p}{(}\PY{n}{dataset\PYZus{}x}\PY{p}{,} \PY{n}{dataset\PYZus{}y}\PY{p}{,} \PY{n}{full\PYZus{}run} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} your code here}
+             \PY{n}{outliers} \PY{o}{=} \PY{p}{[}\PY{p}{]}   \PY{c+c1}{\PYZsh{}empty list \PYZhy{}\PYZhy{}\PYZhy{} used for storing list of outliers}
+             \PY{n}{LENGTH} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{dataset\PYZus{}x}\PY{p}{)}
+             \PY{n}{r2\PYZus{}previous} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{r2\PYZus{}current} \PY{o}{=} \PY{l+m+mf}{0.001}
+             \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{c+c1}{\PYZsh{} loop until there is no improvement of r2 score by removing candidate outliers}
+             \PY{k}{while} \PY{p}{(}\PY{n}{full\PYZus{}run} \PY{o+ow}{or} \PY{n}{r2\PYZus{}previous} \PY{o}{\PYZlt{}} \PY{n}{r2\PYZus{}current}\PY{p}{)} \PY{o+ow}{and} \PY{p}{(}\PY{n}{i} \PY{o}{\PYZlt{}} \PY{n}{LENGTH} \PY{o}{\PYZhy{}} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+               \PY{c+c1}{\PYZsh{} create a linear regression model on the current data}
+               \PY{n}{dataset\PYZus{}x} \PY{o}{=} \PY{n}{dataset\PYZus{}x}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+               \PY{n}{dataset\PYZus{}y} \PY{o}{=} \PY{n}{dataset\PYZus{}y}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+               \PY{n}{X} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{add\PYZus{}constant}\PY{p}{(}\PY{n}{dataset\PYZus{}x}\PY{p}{)}
+               \PY{n}{OutlierOLSModel} \PY{o}{=} \PY{n}{OLS\PYZus{}reg}\PY{p}{(}\PY{n}{dataset\PYZus{}x}\PY{p}{,} \PY{n}{dataset\PYZus{}y}\PY{p}{)}  \PY{c+c1}{\PYZsh{}invoke function to compute OLS regression model}
+         
+               \PY{c+c1}{\PYZsh{} computer Y predicted values and calculate the residuals }
+               \PY{n}{dataset\PYZus{}y\PYZus{}pred} \PY{o}{=} \PY{n}{OutlierOLSModel}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+               \PY{n}{dataset\PYZus{}y\PYZus{}pred} \PY{o}{=} \PY{n}{dataset\PYZus{}y\PYZus{}pred}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+               \PY{n}{residuals} \PY{o}{=}  \PY{p}{(}\PY{n}{dataset\PYZus{}y\PYZus{}pred} \PY{o}{\PYZhy{}} \PY{n}{dataset\PYZus{}y}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}    \PY{c+c1}{\PYZsh{}compute residuals for each data point}
+         
+               \PY{c+c1}{\PYZsh{} identify the data point with highest residual as outlier}
+               \PY{n}{residuals} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{residuals}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{product}\PY{p}{(}\PY{n}{residuals}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}   \PY{c+c1}{\PYZsh{}reshape residuals array}
+               \PY{n}{outlier} \PY{o}{=} \PY{n}{residuals}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}   \PY{c+c1}{\PYZsh{}return maximum distant point as residual}
+               
+               \PY{n}{outliers}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{outlier}\PY{o}{+}\PY{n}{i}\PY{p}{)}   \PY{c+c1}{\PYZsh{}append every outlier to the list}
+               \PY{n}{r2\PYZus{}previous} \PY{o}{=} \PY{n}{r2\PYZus{}current}
+               \PY{n}{r2\PYZus{}current} \PY{o}{=} \PY{n}{r2\PYZus{}score}\PY{p}{(}\PY{n}{dataset\PYZus{}y}\PY{p}{,} \PY{n}{dataset\PYZus{}y\PYZus{}pred}\PY{p}{)}
+         
+               \PY{c+c1}{\PYZsh{} remove the outlier from the data}
+               \PY{n}{dataset\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{dataset\PYZus{}x}\PY{p}{,} \PY{n}{outlier}\PY{p}{)}  \PY{c+c1}{\PYZsh{} delete outliers and re\PYZhy{}run the algorithm}
+               \PY{n}{dataset\PYZus{}y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{dataset\PYZus{}y}\PY{p}{,} \PY{n}{outlier}\PY{p}{)}
+               \PY{n}{i} \PY{o}{=} \PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}           \PY{c+c1}{\PYZsh{}increment while loop condition for next iteration}
+                   
+             \PY{k}{return} \PY{n}{outliers}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{c+c1}{\PYZsh{} Function for plotting outliers}
+         \PY{k}{def} \PY{n+nf}{outliers\PYZus{}plot}\PY{p}{(}\PY{n}{outliers}\PY{p}{)}\PY{p}{:}  
+           \PY{c+c1}{\PYZsh{} Calculate R2 score for each step of the algorithm on test data}
+           \PY{n}{R\PYZus{}2\PYZus{}test\PYZus{}woo\PYZus{}general\PYZus{}all} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+           \PY{n}{train\PYZus{}x\PYZus{}gwoo} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{n}{train\PYZus{}x}\PY{p}{)}
+           \PY{n}{train\PYZus{}y\PYZus{}gwoo} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{n}{train\PYZus{}y}\PY{p}{)}
+           \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+           \PY{c+c1}{\PYZsh{} for each set of outliers, estimate the R2 score of a linear regression model on the remaining training data}
+           \PY{k}{for} \PY{n}{outlier} \PY{o+ow}{in} \PY{n}{outliers}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} remove the outlier from training data}
+             \PY{n}{train\PYZus{}x\PYZus{}gwoo} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{train\PYZus{}x\PYZus{}gwoo}\PY{p}{,} \PY{n}{outlier} \PY{o}{\PYZhy{}} \PY{n}{i}\PY{p}{)}
+             \PY{n}{train\PYZus{}y\PYZus{}gwoo} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{train\PYZus{}y\PYZus{}gwoo}\PY{p}{,} \PY{n}{outlier} \PY{o}{\PYZhy{}} \PY{n}{i}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} create a linear regression model on the remaining training data}
+         
+             \PY{c+c1}{\PYZsh{} OutlierFreeGeneralModel}
+         
+             \PY{n}{OutlierFreeGeneralModel} \PY{o}{=} \PY{n}{OLS\PYZus{}reg}\PY{p}{(}\PY{n}{train\PYZus{}x\PYZus{}gwoo}\PY{p}{,} \PY{n}{train\PYZus{}y\PYZus{}gwoo}\PY{p}{)}   \PY{c+c1}{\PYZsh{}invoke OLS regression function}
+             \PY{c+c1}{\PYZsh{} calculate the R2 score of the model on test data}
+             \PY{n}{test\PYZus{}y\PYZus{}predicted\PYZus{}woo\PYZus{}general} \PY{o}{=} \PY{n}{OutlierFreeGeneralModel}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{sm}\PY{o}{.}\PY{n}{add\PYZus{}constant}\PY{p}{(}\PY{n}{test\PYZus{}x}\PY{p}{)}\PY{p}{)}
+             \PY{n}{test\PYZus{}y\PYZus{}predicted\PYZus{}woo\PYZus{}general} \PY{o}{=} \PY{n}{test\PYZus{}y\PYZus{}predicted\PYZus{}woo\PYZus{}general}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{R\PYZus{}2\PYZus{}test\PYZus{}woo\PYZus{}general} \PY{o}{=} \PY{n}{r2\PYZus{}score}\PY{p}{(}\PY{n}{test\PYZus{}y}\PY{p}{,} \PY{n}{test\PYZus{}y\PYZus{}predicted\PYZus{}woo\PYZus{}general}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} store the R2 score}
+             \PY{n}{R\PYZus{}2\PYZus{}test\PYZus{}woo\PYZus{}general\PYZus{}all}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{R\PYZus{}2\PYZus{}test\PYZus{}woo\PYZus{}general}\PY{p}{)}
+             \PY{n}{i} \PY{o}{=} \PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}
+             
+           \PY{c+c1}{\PYZsh{} create a plot of r2 scores}
+           \PY{n}{r2df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{R\PYZus{}2\PYZus{}test\PYZus{}woo\PYZus{}general\PYZus{}all}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         
+           \PY{c+c1}{\PYZsh{}scatter plot of R2 score on test data}
+           \PY{n}{f}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+           \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{r2\PYZus{}score\PYZus{}test}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{R2 test vs train data with all outliers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+           \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{r2\PYZus{}score\PYZus{}test\PYZus{}woo}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{R2 test vs  train data without outliers \PYZhy{} simple}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+           \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{r2df}\PY{o}{.}\PY{n}{r2}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{r2df}\PY{o}{.}\PY{n}{r2}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{g}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{R2 test vs train data without outliers \PYZhy{} general}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+           \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{r2df}\PY{o}{.}\PY{n}{r2}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}   \PY{c+c1}{\PYZsh{}values of r2 score}
+           \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+           \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{} of outliers removed}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+           \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}R\PYZca{}2\PYZdl{} on test data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+           \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{R2 scores on test data vs total outliers removed from train data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+           \PY{n}{ax}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+           
+           
+         \PY{n}{outliers\PYZus{}general\PYZus{}full} \PY{o}{=} \PY{n}{find\PYZus{}outliers\PYZus{}general}\PY{p}{(}\PY{n}{train\PYZus{}x}\PY{p}{,} \PY{n}{train\PYZus{}y}\PY{p}{,} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{outliers\PYZus{}plot}\PY{p}{(}\PY{n}{outliers\PYZus{}general\PYZus{}full}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_82_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  How many outliers should you try to identify in each step?
+\end{enumerate}
+
+The plot suggest to identify one outlier at each step.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  If you plotted an \(R^2\) score for each step the algorithm, what
+  might that plot tell you about stopping conditions?
+\end{enumerate}
+
+The plot suggests to stop when R2 improvment by removing outliers is not
+significant.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{c+c1}{\PYZsh{} Run algorithm on the training set data}
+         \PY{n}{outliers\PYZus{}general} \PY{o}{=} \PY{n}{find\PYZus{}outliers\PYZus{}general}\PY{p}{(}\PY{n}{train\PYZus{}x}\PY{p}{,} \PY{n}{train\PYZus{}y}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Create regression model on remaining training set data and store the model as OutlierFreeGeneralModel}
+         \PY{n}{train\PYZus{}x\PYZus{}gwoo} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{train\PYZus{}x}\PY{p}{,} \PY{n}{outliers\PYZus{}general}\PY{p}{)}
+         \PY{n}{train\PYZus{}y\PYZus{}gwoo} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{train\PYZus{}y}\PY{p}{,} \PY{n}{outliers\PYZus{}general}\PY{p}{)}
+         \PY{n}{OutlierFreeGeneralModel} \PY{o}{=} \PY{n}{OLS\PYZus{}reg}\PY{p}{(}\PY{n}{train\PYZus{}x\PYZus{}gwoo}\PY{p}{,} \PY{n}{train\PYZus{}y\PYZus{}gwoo}\PY{p}{)}   \PY{c+c1}{\PYZsh{}invoke OLS regression function}
+\end{Verbatim}
+
+
+    \textbf{4.8 Run your algorithm in 4.7 on the training set data }
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{c+c1}{\PYZsh{} your code here}
+         
+         \PY{c+c1}{\PYZsh{} Plot outliers}
+         
+         \PY{n}{outliers\PYZus{}plot}\PY{p}{(}\PY{n}{outliers\PYZus{}general}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} find and print all outliers in training set data}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The following outliers where found: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{outliers\PYZus{}general}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The following outliers where found: [50, 51, 52, 4, 17, 31, 10, 38, 29, 26, 15, 44]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_86_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \emph{your answer here}
+
+Question 4.8:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  How do those outliers compare to the outliers you found in 4.4?
+\end{enumerate}
+
+We seem to detect more outliers which are subtle in nature when we ran
+the outliers\_general algorithm. Whereas when we tried to run a scatter
+plot and find the 3 outliers it was only a small number of outliers
+being detected.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  How does the general outlier-free Linear Regression model you created
+  in 4.7 perform compared to the simple one in 4.4?
+\end{enumerate}
+
+OutlierFreeSimple model does not detect all the outliers present in the
+training data while the General model is able to detect all outliers.
+Therefore once all outliers detected by general model is removed we can
+have the best R2 score for the training set data with the best
+prediction model
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
