@@ -1,5 +1,6 @@
-This repository is a summary of my weekly homework solutions for the course **CS109A Introduction to Data Science** at the **Harvard Extension School** in Fall 2018.
+This repository is a summary of homework solutions I wrote and submited to instructors on a weekly basis for the course **CS109A Introduction to Data Science** at the **Harvard Extension School** in Fall 2018.
 
+Course material can be viewed in the public [GitHub repository](https://github.com/Harvard-IACS/2018-CS109A/tree/master/content)
 
 * Homework 1: Data Collection - Web Scraping - Data Parsing
 
@@ -18,4 +19,4 @@ This repository is a summary of my weekly homework solutions for the course **CS
 * Homework 9: ANNs, Keras, Regulrizing Neural Networks, MNIST handwritten digits
 
 
-My **final team project** is published here https://sites.google.com/view/cs109alendingclubgroup26fall18/
+My **final team project** is published [here](https://sites.google.com/view/cs109alendingclubgroup26fall18/)
